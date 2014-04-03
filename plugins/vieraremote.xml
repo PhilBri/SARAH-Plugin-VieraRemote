@@ -141,7 +141,7 @@
       <!-- Multi-Commands => NRC commands ONLY !!! -->
       <!-- Scenes -->
       <!-- EN COURS DE TEST -->
-      <item>Scène exemple multimedia <tag>out.action.key="NRC_CHG_INPUT-ON,NRC_ENTER-ON,NRC_VIERA_LINK-ON,NRC_ENTER-ON,NRC_LEFT-ON,NRC_DOWN-ON,NRC_ENTER-ON" ;out.action.ttsAction="La chaîne dix est affichée";      </tag></item>
+      <item>Scène exemple multimedia <tag>out.action.key="NRC_CHG_INPUT-ON,NRC_ENTER-ON,NRC_VIERA_LINK-ON,NRC_ENTER-ON,NRC_LEFT-ON,NRC_DOWN-ON,NRC_ENTER-ON" ;out.action.ttsAction="Scène multimédia activée";      </tag></item>
 
 
     </one-of>
