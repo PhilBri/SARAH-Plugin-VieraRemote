@@ -22,7 +22,7 @@ exports.action = function(data,callback,config,SARAH){
 	//  Data to send -- config Values
 	var i = 0;
 	while (i <= keyArray.length-1) {
-		console.log ('\r\nCmd : '+keyArray[i])
+
 		switch (keyArray[i].toString().substr(0,3)) {
 			case "NRC" :
 				TvCode   = '<X_KeyEvent>' + keyArray[i] + '</X_KeyEvent>'; 	// TvKeyCode
@@ -56,12 +56,6 @@ exports.action = function(data,callback,config,SARAH){
 			}
 		}),1000);
 		i++;
-	}
-
-	function wait1s(response) {
-		console.log ('waiting 1s...\r');
-		//i++;
-		setTimeout(function() { 0; }, 1000);	
 	}
 
 	function sendViera(TvCode , TvAction, TvUrl, TvUrn, cb) {
