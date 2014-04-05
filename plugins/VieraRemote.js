@@ -1,66 +1,54 @@
 /*_________________________________________________ 
-| vieraremote V 0.9                                |
+| vieraremote V 1.0                                |
 | Plugin pour S.A.R.A.H.                           |
 | (by Phil Bri 04/2014)                            |
 |__________________________________________________|
 */
 
-exports.action = function(data,callback,config,SARAH){
+exports.action = function ( data , callback , config , SARAH){
 
-	cfg=config.modules.vieraremote;
-	if(!cfg.vieraip){
-		console.log('Missing TV IP in rxvremote.prop !');
-		callback({'tts': 'Adresse I P absente'});
+	cfg = config.modules.vieraremote;
+	if ( !cfg.vieraip ) {
+		console.log ( 'Missing TV IP in rxvremote.prop !' );
+		callback ( {'tts': 'Adresse I P absente'} );
 		return;
 	}
-	TvIp = cfg.vieraip;
-	// init
-	var reponse  = false;
-	var keyArray = data.key.split(',');
-	var	TvUrl    = '/dmr/control_0';
-	var TvUrn    = 'schemas-upnp-org:service:RenderingControl:1#';
-	//  Data to send -- config Values
-	var i = 0;
-	while (i <= keyArray.length-1) {
 
-		switch (keyArray[i].toString().substr(0,3)) {
+	// init
+	var TvIp = cfg.vieraip;
+	var keyArray = data.key.split(',');
+	
+	sendViera( keyArray );
+
+	function sendViera ( cmdList ) {
+
+		// making Viera command
+		var cmdViera = cmdList.shift();
+		switch ( cmdViera.substr(0,3) ) {
 			case "NRC" :
-				TvCode   = '<X_KeyEvent>' + keyArray[i] + '</X_KeyEvent>'; 	// TvKeyCode
-				TvAction = 'X_SendKey'; 									// TvAction
-				TvUrl    = '/nrc/control_0'; 								// TvUrl
-				TvUrn    = 'panasonic-com:service:p00NetworkControl:1#'; 	// TvUrn
+				var TvCode   = '<X_KeyEvent>' + cmdViera + '</X_KeyEvent>';
+				var TvAction = 'X_SendKey';
+				var TvUrl    = '/nrc/control_0';
+				var TvUrn    = 'panasonic-com:service:p00NetworkControl:1#';
 				break;
 			case "Set" :
-				TvCode   = '<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredVolume>'+ data.volume.toString() + '</DesiredVolume>';
-				TvAction = data.key;
+				var TvCode   = '<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredVolume>'+ data.volume.toString() + '</DesiredVolume>';
+				TvAction	 = cmdViera;
+				var	TvUrl    = '/dmr/control_0';
+				var TvUrn    = 'schemas-upnp-org:service:RenderingControl:1#';
 				break;
 			case "Get" :
-				TvCode  = '<InstanceID>0</InstanceID><Channel>Master</Channel>';
-				TvAction = data.key;
+				var TvCode  = '<InstanceID>0</InstanceID><Channel>Master</Channel>';
+				var TvAction = cmdViera;
+				var	TvUrl    = '/dmr/control_0';
+				var TvUrn    = 'schemas-upnp-org:service:RenderingControl:1#';
 				break;
 			default :
 				callback({'tts': 'Erreur dans le fichier X M L'});
 				break;
 		}
-		setTimeout(sendViera(TvCode , TvAction, TvUrl, TvUrn,function(clbk){
 
-			if (clbk){  // Case "get"
-   				var regex = /<CurrentVolume>(\d*)<\/CurrentVolume>/gm;
-				var match = regex.exec(clbk);
-				if (match !== null) {
-					var volume = match[1];
-					callback ({'tts':'Le volume actuel est de ' + volume.toString() + '%'});
-				}else{
-					callback ({'tts': data.ttsAction});
-				}
-			}
-		}),1000);
-		i++;
-	}
-
-	function sendViera(TvCode , TvAction, TvUrl, TvUrn, cb) {
 		// Making xml body
-		//var body  = false;
 		var body  = '<?xml version="1.0" encoding="utf-8"?>\n'
 			body += '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\n'
 			body += 	'<s:Body>\n'
@@ -70,9 +58,10 @@ exports.action = function(data,callback,config,SARAH){
 			body += 	'</s:Body>\n'
 			body += '</s:Envelope>\n';
 
+		// Sending Request
 		var request = require ('request');
 		request ({
-			uri	    : 'http://'+TvIp+':55000'+TvUrl,
+			uri	    : 'http://' + TvIp + ':55000' + TvUrl,
 			method  : 'POST',
 			headers :
 			{
@@ -81,15 +70,31 @@ exports.action = function(data,callback,config,SARAH){
 				'SOAPACTION'	:   '"urn:' + TvUrn + TvAction +'"'
 			},
 			body	: body
-		}, function (err, response, body) {
+			}, function ( err , response , body ) {
 
-	    	if (err || response.statusCode != 200) {
-     			callback ({'tts': "L'action a échouée"});
-   			} else {
-   				console.log ('Commande => OK \r\n');
-   				reponse = true;
-				cb (body);
+				if ( response.statusCode = 200 ) {
+
+    				if ( data.key != undefined ) {
+    					var regex = /<CurrentVolume>(\d*)<\/CurrentVolume>/gm;
+						var match = regex.exec ( body );
+						if (  match ) {
+							var volume = match[1].toString();
+							console.log ( "Volume TV = "+volume );
+							callback ({ 'tts': 'Le volume actuel est de' + volume + ' %'});
+						} else {
+							callback ({ 'tts': data.ttsAction });
+						}
+						if ( keyArray.length ) {
+							sendViera( keyArray );
+						}
+    				}
+   					console.log ( 'Commande TV : '+ cmdViera +' => OK \r\n' );
+
+   				} else {
+     				callback ({ 'tts': "L'action a échouée" });
+				}
 			}
-		});
+		);
 	}
+
 }
