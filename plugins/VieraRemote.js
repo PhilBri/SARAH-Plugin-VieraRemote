@@ -9,7 +9,7 @@ exports.action = function ( data , callback , config , SARAH){
 
 	cfg = config.modules.vieraremote;
 	if ( !cfg.vieraip ) {
-		console.log ( 'Missing TV IP in rxvremote.prop !' );
+		console.log ( 'Missing TV IP in vieraremote.prop !' );
 		callback ( {'tts': 'Adresse I P absente'} );
 		return;
 	}
