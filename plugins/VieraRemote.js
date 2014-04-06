@@ -5,12 +5,12 @@
 |__________________________________________________|
 */
 
-exports.action = function ( data , callback , config , SARAH){
+exports.action = function ( data , callback , config , SARAH ){
 
 	cfg = config.modules.vieraremote;
 	if ( !cfg.vieraip ) {
 		console.log ( 'Missing TV IP in vieraremote.prop !' );
-		callback ( {'tts': 'Adresse I P absente'} );
+		callback ({ 'tts': 'Adresse I P absente' });
 		return;
 	}
 
@@ -18,7 +18,7 @@ exports.action = function ( data , callback , config , SARAH){
 	var TvIp = cfg.vieraip;
 	var keyArray = data.key.split(',');
 	
-	sendViera( keyArray );
+	sendViera ( keyArray );
 
 	function sendViera ( cmdList ) {
 
@@ -38,39 +38,38 @@ exports.action = function ( data , callback , config , SARAH){
 				var TvUrn    = 'schemas-upnp-org:service:RenderingControl:1#';
 				break;
 			case "Get" :
-				var TvCode  = '<InstanceID>0</InstanceID><Channel>Master</Channel>';
+				var TvCode   = '<InstanceID>0</InstanceID><Channel>Master</Channel>';
 				var TvAction = cmdViera;
 				var	TvUrl    = '/dmr/control_0';
 				var TvUrn    = 'schemas-upnp-org:service:RenderingControl:1#';
 				break;
 			default :
-				callback({'tts': 'Erreur dans le fichier X M L'});
+				callback({ 'tts': 'Erreur dans le fichier X M L' });
 				break;
 		}
 
 		// Making xml body
-		var body  = '<?xml version="1.0" encoding="utf-8"?>\n'
-			body += '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\n'
-			body += 	'<s:Body>\n'
-			body += 		'<u:'+ TvAction +' xmlns:u="urn:' + TvUrn + '">\n'
-			body +=				TvCode + '\n'
-			body += 		'</u:'+ TvAction +'>\n'
-			body += 	'</s:Body>\n'
-			body += '</s:Envelope>\n';
+		var body  = '<?xml version="1.0" encoding="utf-8"?>'
+			body += '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
+			body += 	'<s:Body>'
+			body += 		'<u:'+ TvAction +' xmlns:u="urn:' + TvUrn + '">'
+			body +=				TvCode
+			body += 		'</u:'+ TvAction
+			body += 	'</s:Body>'
+			body += '</s:Envelope>\n\r';
 
-		// Sending Request
-		var request = require ('request');
+		// Sending SOAP request
+		var request = require ('request' );
 		request ({
 			uri	    : 'http://' + TvIp + ':55000' + TvUrl,
 			method  : 'POST',
 			headers :
 			{
-				'Content-length':   body.length,
-				'Content-type'	:   'text/xml; charset="utf-8"',
-				'SOAPACTION'	:   '"urn:' + TvUrn + TvAction +'"'
+				'Content-length' :   body.length,
+				'Content-type'	 :   'text/xml; charset="utf-8"',
+				'SOAPACTION'	 :   '"urn:' + TvUrn + TvAction +'"'
 			},
-			body	: body
-			}, function ( err , response , body ) {
+			body	: body }, function ( err , response , body ) {
 
 				if ( response.statusCode = 200 ) {
 
@@ -85,10 +84,10 @@ exports.action = function ( data , callback , config , SARAH){
 							callback ({ 'tts': data.ttsAction });
 						}
 						if ( keyArray.length ) {
-							sendViera( keyArray );
+							sendViera ( keyArray );
 						}
     				}
-   					console.log ( 'Commande TV : '+ cmdViera +' => OK \r\n' );
+   					console.log ( 'Commande TV : ' + cmdViera + ' => OK \r\n' );
 
    				} else {
      				callback ({ 'tts': "L'action a échouée" });

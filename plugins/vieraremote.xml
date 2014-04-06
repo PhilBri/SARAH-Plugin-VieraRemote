@@ -65,7 +65,7 @@
       <item>Met la chaine d'aprés            <tag>out.action.key="NRC_CH_UP-ONOFF"    ;out.action.ttsAction="La chaîne suivante est affichée";      </tag></item>
       <item>Met la chaine précedante         <tag>out.action.key="NRC_CH_DOWN-ONOFF"  ;out.action.ttsAction="La chaîne précedante est affichée";    </tag></item>
       <item>Met la chaine d'avant            <tag>out.action.key="NRC_CH_DOWN-ONOFF"  ;out.action.ttsAction="La chaîne précedante est affichée";    </tag></item>
-      <item>Met l'entrée sur télé            <tag>out.action.key="NRC_TV-ONOFF"       ;out.action.ttsAction="L'entrée est sur télé";                </tag></item>
+      <item>Entrée suivante                  <tag>out.action.key="NRC_TV-ONOFF"       ;out.action.ttsAction="L'entrée suivante est sélectionnée";   </tag></item>
 
       <!-- Toggles -->
       <item>touche zéro                      <tag>out.action.key="NRC_D0-ONOFF"       ;out.action.ttsAction="zéro";                                 </tag></item>
