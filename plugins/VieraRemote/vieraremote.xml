@@ -1,5 +1,5 @@
-<grammar version="1.0" xml:lang="fr-FR" mode="voice" root="rulervieraremote" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
-  <rule id="rulervieraremote" scope="public">
+<grammar version="1.0" xml:lang="fr-FR" mode="voice" root="rulevieraremote" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
+  <rule id="rulevieraremote" scope="public">
   <example>Sarah allume la télé</example>
   <tag>out.action=new Object(); </tag>
   <item>Sarah</item>
@@ -157,15 +157,12 @@
       <item>Met la cinquante et un <tag>out.action.key="NRC_D5-ONOFF,NRC_D1-ONOFF" ;out.action.ttsAction="La chaîne 51 est affichée";               </tag></item>
 
       <!-- Want More ? -->
-      <item>Met la 103             <tag>out.action.key="NRC_D1-ONOFF,NRC_D0-ONOFF,NRC_D3-ONOFF" ;out.action.ttsAction="La chaine 103 est affichée"  </tag></item>
+      <item>Met la 103             <tag>out.action.key="NRC_D1-ONOFF,NRC_D0-ONOFF,NRC_D3-ONOFF" ;out.action.ttsAction="La chaine 103 est affichée"; </tag></item>
 
       <!-- Multi-Commands => NRC commands ONLY !!! -->
       <!-- Scenes -->
       <!-- EN COURS DE TEST -->
-      <item>Exemple multimédia
-            <tag>out.action.key="NRC_CHG_INPUT-ON,NRC_ENTER-ON,NRC_VIERA_LINK-ON,NRC_ENTER-ON,NRC_LEFT-ON,NRC_DOWN-ON,NRC_ENTER-ON" ;out.action.ttsAction="Exemple multimédia exéctuté";
-            </tag>
-      </item>
+      <item>Exemple multimédia<tag>out.action.key="NRC_CHG_INPUT-ON,NRC_ENTER-ON,NRC_VIERA_LINK-ON,NRC_ENTER-ON,NRC_LEFT-ON,NRC_DOWN-ON,NRC_ENTER-ON" ;out.actio.ttsAction"Exemple multimédia exéctuté";</tag></item>
 
     </one-of>
 
