@@ -10,8 +10,7 @@ exports.action = function ( data , callback , config , SARAH ) {
 	cfg = config.modules.vieraremote;
 	if ( !cfg.vieraip ) {
 		console.log ( 'Missing TV IP in vieraremote.prop !' );
-		callback ({ 'tts': 'Adresse I P absente' });
-		return;
+		return callback ({ 'tts': 'Adresse I P absente' });
 	}
 
 	// init
@@ -78,7 +77,7 @@ exports.action = function ( data , callback , config , SARAH ) {
 						var match = regex.exec ( body );
 						if (  match ) {
 							var volume = match[1].toString();
-							console.log ( "Volume TV = "+volume );
+							console.log ( "Volume TV = " + volume );
 							callback ({ 'tts': 'Le volume actuel est de' + volume + ' %' });
 						} else {
 							callback ({ 'tts': data.ttsAction });
