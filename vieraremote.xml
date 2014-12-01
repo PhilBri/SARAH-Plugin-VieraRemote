@@ -7,9 +7,10 @@
     <one-of>
 
       <!-- Orders => Keys -->
-      <!--item>Allume la télé
+      <item>Allume la télé
             <tag>out.action.key="NRC_POWER-ONOFF"    ;out.action.ttsAction="la télé est allumée";</tag>
-      </item-->
+      </item>
+      
       <item>éteint la télé
             <tag>out.action.key="NRC_POWER-ONOFF"; out.action.ttsAction="la télé est éteinte";</tag>
       </item>
@@ -202,46 +203,144 @@
 
       <!-- Multi-Commands => Keys -->
       <!-- Multi-digit TV Channels -->
-      <item>Met la 10              <tag>out.action.key="NRC_D1-ONOFF,NRC_D0-ONOFF" ;out.action.ttsAction="La chaîne dix est affichée";              </tag></item>
-      <item>Met T M C              <tag>out.action.key="NRC_D1-ONOFF,NRC_D0-ONOFF" ;out.action.ttsAction="T M C est affichée";                      </tag></item>
-      <item>Met la onze            <tag>out.action.key="NRC_D1-ONOFF,NRC_D1-ONOFF" ;out.action.ttsAction="La chaîne onze est affichée";             </tag></item>
-      <item>Met N T 1              <tag>out.action.key="NRC_D1-ONOFF,NRC_D1-ONOFF" ;out.action.ttsAction="N T 1 est affichée";                      </tag></item>
-      <item>Met la douze           <tag>out.action.key="NRC_D1-ONOFF,NRC_D2-ONOFF" ;out.action.ttsAction="La chaîne douze est affichée";            </tag></item>
-      <item>Met N R J 12           <tag>out.action.key="NRC_D1-ONOFF,NRC_D2-ONOFF" ;out.action.ttsAction="N R J 12 est affichée";                   </tag></item>
-      <item>Met la 13              <tag>out.action.key="NRC_D1-ONOFF,NRC_D3-ONOFF" ;out.action.ttsAction="La chaîne treize est affichée";           </tag></item>
-      <item>Met L C P              <tag>out.action.key="NRC_D1-ONOFF,NRC_D3-ONOFF" ;out.action.ttsAction="L C P est affichée";                      </tag></item>
-      <item>Met la quatorze        <tag>out.action.key="NRC_D1-ONOFF,NRC_D4-ONOFF" ;out.action.ttsAction="La chaîne quatorze est affichée";         </tag></item>
-      <item>Met France 4           <tag>out.action.key="NRC_D1-ONOFF,NRC_D4-ONOFF" ;out.action.ttsAction="France 4 est affichée";                   </tag></item>
-      <item>Met la quinze          <tag>out.action.key="NRC_D1-ONOFF,NRC_D5-ONOFF" ;out.action.ttsAction="La chaîne Quinze est affichée";           </tag></item>
-      <item>Met B F M              <tag>out.action.key="NRC_D1-ONOFF,NRC_D5-ONOFF" ;out.action.ttsAction="B F M T V est affichée";                  </tag></item>
-      <item>Met la 16              <tag>out.action.key="NRC_D1-ONOFF,NRC_D6-ONOFF" ;out.action.ttsAction="La chaîne seize est affichée";            </tag></item>
-      <item>Met I télé             <tag>out.action.key="NRC_D1-ONOFF,NRC_D6-ONOFF" ;out.action.ttsAction="I télé est affichée";                     </tag></item>
-      <item>Met la 17              <tag>out.action.key="NRC_D1-ONOFF,NRC_D7-ONOFF" ;out.action.ttsAction="La chaîne 17 est affichée";               </tag></item>
-      <item>Met D 17               <tag>out.action.key="NRC_D1-ONOFF,NRC_D7-ONOFF" ;out.action.ttsAction="D 17 est affichée";                       </tag></item>
-      <item>Met la 18              <tag>out.action.key="NRC_D1-ONOFF,NRC_D8-ONOFF" ;out.action.ttsAction="La chaîne 18 est affichée";               </tag></item>
-      <item>Met Guli               <tag>out.action.key="NRC_D1-ONOFF,NRC_D8-ONOFF" ;out.action.ttsAction="Guli est affichée";                       </tag></item>
-      <item>Met la 19              <tag>out.action.key="NRC_D1-ONOFF,NRC_D9-ONOFF" ;out.action.ttsAction="La chaîne 19 est affichée";               </tag></item>
-      <item>Met France O           <tag>out.action.key="NRC_D1-ONOFF,NRC_D9-ONOFF" ;out.action.ttsAction="France O est affichée";                   </tag></item>
-      <item>Met la vingt           <tag>out.action.key="NRC_D2-ONOFF,NRC_D0-ONOFF" ;out.action.ttsAction="La chaîne 20 est affichée";               </tag></item>
-      <item>Met H D 1              <tag>out.action.key="NRC_D2-ONOFF,NRC_D0-ONOFF" ;out.action.ttsAction="H D 1 est affichée";                      </tag></item>
-      <item>Met la vingt et un     <tag>out.action.key="NRC_D2-ONOFF,NRC_D1-ONOFF" ;out.action.ttsAction="La chaîne 21 est affichée";               </tag></item>
-      <item>Met l'équipe 21        <tag>out.action.key="NRC_D2-ONOFF,NRC_D1-ONOFF" ;out.action.ttsAction="L'équipe 21 est affichée";                </tag></item>
-      <item>Met la 22              <tag>out.action.key="NRC_D2-ONOFF,NRC_D2-ONOFF" ;out.action.ttsAction="La chaîne vingt deux est affichée";       </tag></item>
-      <item>Met 6 ter              <tag>out.action.key="NRC_D2-ONOFF,NRC_D2-ONOFF" ;out.action.ttsAction="6 ter est affichée";                      </tag></item>
-      <item>Met la 23              <tag>out.action.key="NRC_D2-ONOFF,NRC_D3-ONOFF" ;out.action.ttsAction="La chaîne vingt trois est affichée";      </tag></item>
-      <item>Met la vingt quatre    <tag>out.action.key="NRC_D2-ONOFF,NRC_D4-ONOFF" ;out.action.ttsAction="La chaîne vingt quatre est affichée";     </tag></item>
-      <item>Met R M C              <tag>out.action.key="NRC_D2-ONOFF,NRC_D4-ONOFF" ;out.action.ttsAction="R M C est affichée";                      </tag></item>
-      <item>Met la vingt cinq      <tag>out.action.key="NRC_D2-ONOFF,NRC_D5-ONOFF" ;out.action.ttsAction="La chaîne vingt cinq est affichée";       </tag></item>
-      <item>Met chérie 25          <tag>out.action.key="NRC_D2-ONOFF,NRC_D5-ONOFF" ;out.action.ttsAction="La chérie 25 est affichée";               </tag></item>
-      <item>Met la cinquante et un <tag>out.action.key="NRC_D5-ONOFF,NRC_D1-ONOFF" ;out.action.ttsAction="La chaîne 51 est affichée";               </tag></item>
+      <item>Met la 10
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D0-ONOFF" ;out.action.ttsAction="La chaîne dix est affichée";              </tag>
+      </item>
+
+      <item>Met T M C              <tag>out.action.key="NRC_D1-ONOFF,NRC_D0-ONOFF" ;out.action.ttsAction="T M C est affichée";                      </tag>
+      </item>
+
+      <item>Met la onze
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D1-ONOFF" ;out.action.ttsAction="La chaîne onze est affichée";             </tag>
+      </item>
+
+      <item>Met N T 1
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D1-ONOFF" ;out.action.ttsAction="N T 1 est affichée";                      </tag>
+      </item>
+
+      <item>Met la douze
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D2-ONOFF" ;out.action.ttsAction="La chaîne douze est affichée";            </tag>
+      </item>
+
+      <item>Met N R J 12
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D2-ONOFF" ;out.action.ttsAction="N R J 12 est affichée";                   </tag>
+      </item>
+
+      <item>Met la 13
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D3-ONOFF" ;out.action.ttsAction="La chaîne treize est affichée";           </tag>
+      </item>
+
+      <item>Met L C P
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D3-ONOFF" ;out.action.ttsAction="L C P est affichée";                      </tag>
+      </item>
+
+      <item>Met la quatorze
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D4-ONOFF" ;out.action.ttsAction="La chaîne quatorze est affichée";         </tag>
+      </item>
+
+      <item>Met France 4
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D4-ONOFF" ;out.action.ttsAction="France 4 est affichée";</tag>
+      </item>
+
+      <item>Met la quinze
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D5-ONOFF" ;out.action.ttsAction="La chaîne Quinze est affichée";</tag>
+      </item>
+
+      <item>Met B F M
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D5-ONOFF" ;out.action.ttsAction="B F M T V est affichée";</tag>
+      </item>
+
+      <item>Met la 16
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D6-ONOFF" ;out.action.ttsAction="La chaîne seize est affichée";</tag>
+      </item>
+
+      <item>Met I télé
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D6-ONOFF" ;out.action.ttsAction="I télé est affichée";</tag>
+      </item>
+
+      <item>Met la 17
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D7-ONOFF" ;out.action.ttsAction="La chaîne 17 est affichée";</tag>
+      </item>
+
+      <item>Met D 17
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D7-ONOFF" ;out.action.ttsAction="D 17 est affichée";</tag>
+      </item>
+
+      <item>Met la 18
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D8-ONOFF" ;out.action.ttsAction="La chaîne 18 est affichée";</tag>
+      </item>
+
+      <item>Met Guli
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D8-ONOFF" ;out.action.ttsAction="Guli est affichée";</tag>
+      </item>
+
+      <item>Met la 19
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D9-ONOFF" ;out.action.ttsAction="La chaîne 19 est affichée";</tag>
+      </item>
+
+      <item>Met France O
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D9-ONOFF" ;out.action.ttsAction="France O est affichée";</tag>
+      </item>
+
+      <item>Met la vingt
+            <tag>out.action.key="NRC_D2-ONOFF,NRC_D0-ONOFF" ;out.action.ttsAction="La chaîne 20 est affichée";</tag>
+      </item>
+
+      <item>Met H D 1
+            <tag>out.action.key="NRC_D2-ONOFF,NRC_D0-ONOFF" ;out.action.ttsAction="H D 1 est affichée";</tag>
+      </item>
+
+      <item>Met la vingt et un
+            <tag>out.action.key="NRC_D2-ONOFF,NRC_D1-ONOFF" ;out.action.ttsAction="La chaîne 21 est affichée";</tag>
+      </item>
+
+      <item>Met l'équipe 21
+            <tag>out.action.key="NRC_D2-ONOFF,NRC_D1-ONOFF" ;out.action.ttsAction="L'équipe 21 est affichée";</tag>
+      </item>
+
+      <item>Met la 22
+            <tag>out.action.key="NRC_D2-ONOFF,NRC_D2-ONOFF" ;out.action.ttsAction="La chaîne vingt deux est affichée";</tag>
+      </item>
+
+      <item>Met 6 ter
+            <tag>out.action.key="NRC_D2-ONOFF,NRC_D2-ONOFF" ;out.action.ttsAction="6 ter est affichée";</tag>
+      </item>
+
+      <item>Met la 23
+            <tag>out.action.key="NRC_D2-ONOFF,NRC_D3-ONOFF" ;out.action.ttsAction="La chaîne vingt trois est affichée";</tag>
+      </item>
+
+      <item>Met la vingt quatre
+            <tag>out.action.key="NRC_D2-ONOFF,NRC_D4-ONOFF" ;out.action.ttsAction="La chaîne vingt quatre est affichée";</tag>
+      </item>
+
+      <item>Met R M C
+            <tag>out.action.key="NRC_D2-ONOFF,NRC_D4-ONOFF" ;out.action.ttsAction="R M C est affichée";</tag>
+      </item>
+
+      <item>Met la vingt cinq
+            <tag>out.action.key="NRC_D2-ONOFF,NRC_D5-ONOFF" ;out.action.ttsAction="La chaîne vingt cinq est affichée";</tag>
+      </item>
+
+      <item>Met chérie 25
+            <tag>out.action.key="NRC_D2-ONOFF,NRC_D5-ONOFF" ;out.action.ttsAction="La chérie 25 est affichée";</tag>
+      </item>
+
+      <item>Met la cinquante et un
+            <tag>out.action.key="NRC_D5-ONOFF,NRC_D1-ONOFF" ;out.action.ttsAction="La chaîne 51 est affichée";</tag>
+      </item>
 
       <!-- Want More ? -->
-      <item>Met la 103             <tag>out.action.key="NRC_D1-ONOFF,NRC_D0-ONOFF,NRC_D3-ONOFF" ;out.action.ttsAction="La chaine 103 est affichée"; </tag></item>
+      <item>Met la 103
+            <tag>out.action.key="NRC_D1-ONOFF,NRC_D0-ONOFF,NRC_D3-ONOFF";out.action.ttsAction="La chaine 103 est affichée";</tag>
+      </item>
 
       <!-- Multi-Commands => NRC commands ONLY !!! -->
       <!-- Scenes -->
       <!-- EN COURS DE TEST -->
-      <item>Exemple multimédia<tag>out.action.key="NRC_CHG_INPUT-ON,NRC_ENTER-ON,NRC_VIERA_LINK-ON,NRC_ENTER-ON,NRC_LEFT-ON,NRC_DOWN-ON,NRC_ENTER-ON" ;out.actio.ttsAction"Exemple multimédia exéctuté";</tag></item>
+      <item>Exemple multimédia
+            <tag>out.action.key="NRC_CHG_INPUT-ON,NRC_ENTER-ON,NRC_VIERA_LINK-ON,NRC_ENTER-ON,NRC_LEFT-ON,NRC_DOWN-ON,NRC_ENTER-ON" ;out.actio.ttsAction"Exemple multimédia exéctuté";</tag>
+      </item>
 
     </one-of>
 
