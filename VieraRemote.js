@@ -18,7 +18,7 @@ exports.init = function ( SARAH ) {
 	findViera( 'Panasonic VIErA', 'DTV', function ( tvIP ) {
 		if ( !tvIP ) { return console.log ( '\r\nVieraRemote => T V Viera non trouvée\r\n' ) }
 		VieraIP = tvIP;
-		console.log ( '\r\nLiveBoxRemote => Viera IP = ' + VieraIP + ' (Auto Detection)\r\n');
+		console.log ( '\r\nVieraRemote => Viera IP = ' + VieraIP + ' (Auto Detection)\r\n');
 	});
 }
 
