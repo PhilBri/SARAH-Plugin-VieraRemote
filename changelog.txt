@@ -2,3 +2,5 @@ VieraRemote
 === version 1.0 (05/04/2014) ===
 Amélioration des écritures séquentielles.
 Amélioration du retour "tts" de SARAH.
+=== version 2.0 (01/12/2014 ===
+Autodétection de l'IP

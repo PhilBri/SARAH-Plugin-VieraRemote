@@ -1,9 +1,8 @@
 {
-  "modules" : { 
-    "vieraremote"  : {
-      "description": "SARAH controle les TV PANASONIC ViERA",
-      "version" : "0.9",
-	  "vieraip": ""
-    }
-  }
+	"modules" : { 
+		"vieraremote"  : {
+			"description": "SARAH controle les TV PANASONIC VIErA",
+			"version" : "2.0"
+		}
+	}
 }
