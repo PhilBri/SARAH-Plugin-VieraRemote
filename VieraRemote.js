@@ -37,7 +37,7 @@ exports.action = function ( data , callback , config , SARAH ) {
 		switch ( cmdViera.substr(0,3) ) {
 			case "NRC" :
 				var TvCode		= '<X_KeyEvent>' + cmdViera + '</X_KeyEvent>';
-				var TvAction	= 'X_SendKey';
+				var TvAction 	= 'X_SendKey';
 				var TvUrl		= '/nrc/control_0';
 				var TvUrn		= 'panasonic-com:service:p00NetworkControl:1#';
 				break;
@@ -49,7 +49,7 @@ exports.action = function ( data , callback , config , SARAH ) {
 				break;
 			case "Get" :
 				var TvCode		= '<InstanceID>0</InstanceID><Channel>Master</Channel>';
-				var TvAction	= cmdViera;
+				var TvAction 	= cmdViera;
 				var	TvUrl		= '/dmr/control_0';
 				var TvUrn		= 'schemas-upnp-org:service:RenderingControl:1#';
 				break;
