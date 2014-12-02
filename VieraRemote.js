@@ -80,9 +80,9 @@ exports.action = function ( data , callback , config , SARAH ) {
 				'SOAPACTION'	 :   '"urn:' + TvUrn + TvAction +'"'
 			},
 			body	: body 
-		}, function ( err , response , body ) {
+		}, function ( error , response , body ) {
 
-				if ( response.statusCode = 200 ) {
+				if ( !error && response.statusCode == 200 ) {
     				if ( data.key != undefined ) {
     					var regex = /<CurrentVolume>(\d*)<\/CurrentVolume>/gm;
 						var match = regex.exec ( body );
