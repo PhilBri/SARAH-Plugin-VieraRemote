@@ -16,15 +16,15 @@ exports.init = function ( SARAH ) {
 	var findViera = require ( './lib/findUPNP.js' );
 
 	findViera( 'Panasonic VIErA', 'DTV', function ( tvIP ) {
-		if ( !tvIP ) { return console.log ( '\r\nVieraRemote => T V Viera non trouvée\r\n' ) }
+		if ( !tvIP ) { return console.log ( '\r\nVieraRemote => T V VIErA non trouvée (Auto Détection)\r\n' ) }
 		VieraIP = tvIP;
-		console.log ( '\r\nVieraRemote => Viera IP = ' + VieraIP + ' (Auto Detection)\r\n');
+		console.log ( '\r\nVieraRemote => VIErA IP = ' + VieraIP + ' (Auto Détection)\r\n');
 	});
 }
 
 exports.action = function ( data , callback , config , SARAH ) {
 
-	if ( VieraIP == undefined ) { return callback ({ 'tts' : 'T V Viera non trouvée' }) }
+	if ( !VieraIP ) { return callback ({ 'tts' : 'T V Viera non trouvée' }) }
 
 	var keyArray = data.key.split( ',' );
 	
