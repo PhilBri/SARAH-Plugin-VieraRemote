@@ -9,6 +9,10 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 =======
 
 >>>>>>> origin/master
@@ -19,15 +23,21 @@ exports.init = function ( SARAH ) {
 	var findViera = require ( './lib/findUPNP.js' );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	findViera ( 'Panasonic VIErA', 'DTV', function ( tvIP ) {
 		if ( !tvIP ) { return console.log ( '\r\nVieraRemote => T V VIErA non trouvée (Auto détection)\r\n' ) }
 		VieraIP = tvIP;
 		console.log ( '\r\nVieraRemote => VIErA IP = ' + VieraIP + ' (Auto détection)\r\n');
 =======
+=======
+>>>>>>> origin/master
 	findViera( 'Panasonic VIErA', 'DTV', function ( tvIP ) {
 		if ( !tvIP ) { return console.log ( '\r\nVieraRemote => T V VIErA non trouvée (Auto Détection)\r\n' ) }
 		VieraIP = tvIP;
 		console.log ( '\r\nVieraRemote => VIErA IP = ' + VieraIP + ' (Auto Détection)\r\n');
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
 	});
 }
@@ -37,8 +47,11 @@ exports.action = function ( data , callback , config , SARAH ) {
 	if ( !VieraIP ) { return callback ({ 'tts' : 'T V Viera non trouvée' }) }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	var keyArray = data.key.split ( ',' );
 =======
+=======
+>>>>>>> origin/master
 	var keyArray = data.key.split( ',' );
 >>>>>>> origin/master
 	
@@ -108,6 +121,9 @@ exports.action = function ( data , callback , config , SARAH ) {
 			body	: body 
 		}, function ( error , response , body ) {
 
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
 				if ( !error && response.statusCode == 200 ) {
     				if ( data.key != undefined ) {
