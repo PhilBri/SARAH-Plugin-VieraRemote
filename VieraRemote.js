@@ -1,21 +1,31 @@
-/*_________________________________________________ 
-| vieraremote V 1.0                                |
-| Plugin pour S.A.R.A.H.                           |
-| (by Phil Bri 04/2014)                            |
-|__________________________________________________|
+/*__________________________________________________
+|              PanaBDRemote v2.0                    |
+|                                                   |
+| Author : Phil Bri (12/2014)                       |
+|    (See http://encausse.wordpress.com/s-a-r-a-h/) |
+| Description :                                     |
+|    Panasonic VIErA TV Plugin for SARAH project    |
+|___________________________________________________|
 */
+
+var VieraIP;
+
+exports.init = function ( SARAH ) {
+
+	var findViera = require ( './lib/findUPNP.js' );
+
+	findViera ( 'Panasonic VIErA', 'DTV', function ( tvIP ) {
+		if ( !tvIP ) { return console.log ( '\r\nVieraRemote => T V VIErA non trouvée (Auto détection)\r\n' ) }
+		VieraIP = tvIP;
+		console.log ( '\r\nVieraRemote => VIErA IP = ' + VieraIP + ' (Auto détection)\r\n');
+	});
+}
 
 exports.action = function ( data , callback , config , SARAH ) {
 
-	cfg = config.modules.vieraremote;
-	if ( !cfg.vieraip ) {
-		console.log ( 'Missing TV IP in vieraremote.prop !' );
-		return callback ({ 'tts': 'Adresse I P absente' });
-	}
+	if ( !VieraIP ) { return callback ({ 'tts' : 'T V Viera non trouvée' }) }
 
-	// init
-	var TvIp = cfg.vieraip;
-	var keyArray = data.key.split( ',' );
+	var keyArray = data.key.split ( ',' );
 	
 	sendViera ( keyArray );
 
@@ -43,7 +53,7 @@ exports.action = function ( data , callback , config , SARAH ) {
 				var TvUrn		= 'schemas-upnp-org:service:RenderingControl:1#';
 				break;
 			default :
-				callback({ 'tts': 'Erreur dans le fichier X M L' });
+				callback ({ 'tts': 'Erreur dans le fichier X M L' });
 				break;
 		}
 
@@ -59,25 +69,23 @@ exports.action = function ( data , callback , config , SARAH ) {
 
 		// Sending SOAP request
 		var request = require ('request' );
-		request ({
-			uri	    : 'http://' + TvIp + ':55000' + TvUrl,
-			method  : 'POST',
-			headers :
-			{
-				'Content-length' :   body.length,
-				'Content-type'	 :   'text/xml; charset="utf-8"',
-				'SOAPACTION'	 :   '"urn:' + TvUrn + TvAction +'"'
-			},
-			body	: body 
-		}, function ( err , response , body ) {
 
-				if ( response.statusCode = 200 ) {
+		request ({	uri	    : 	'http://' + VieraIP + ':55000' + TvUrl,
+					method  : 	'POST',
+					headers : {	'Content-length' :   body.length,
+								'Content-type'	 :   'text/xml; charset="utf-8"',
+								'SOAPACTION'	 :   '"urn:' + TvUrn + TvAction +'"' },
+					body	: 	body 
+
+		}, function ( error , response , body ) {
+
+				if ( !error && response.statusCode == 200 ) {
     				if ( data.key != undefined ) {
     					var regex = /<CurrentVolume>(\d*)<\/CurrentVolume>/gm;
 						var match = regex.exec ( body );
 						if (  match ) {
 							var volume = match[1].toString();
-							console.log ( "Volume TV = " + volume );
+							console.log ( "\r\nVieraRemote => Volume TV = " + volume + ' %\r\n' );
 							callback ({ 'tts': 'Le volume actuel est de' + volume + ' %' });
 						} else {
 							callback ({ 'tts': data.ttsAction });
@@ -86,7 +94,7 @@ exports.action = function ( data , callback , config , SARAH ) {
 							sendViera ( keyArray );
 						}
     				}
-   					console.log ( 'Commande TV : ' + cmdViera + ' => OK \r\n' );
+   					console.log ( '\r\nVieraRemote => cmd : "' + cmdViera + '" = OK \r\n' );
 
    				} else {
      				callback ({ 'tts': "L'action a échouée" });
@@ -94,5 +102,4 @@ exports.action = function ( data , callback , config , SARAH ) {
 			}
 		);
 	}
-
 }
