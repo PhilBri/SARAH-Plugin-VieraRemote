@@ -8,37 +8,16 @@
 |___________________________________________________|
 */
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
-=======
-
->>>>>>> origin/master
 var VieraIP;
 
 exports.init = function ( SARAH ) {
 
 	var findViera = require ( './lib/findUPNP.js' );
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	findViera ( 'Panasonic VIErA', 'DTV', function ( tvIP ) {
 		if ( !tvIP ) { return console.log ( '\r\nVieraRemote => T V VIErA non trouvée (Auto détection)\r\n' ) }
 		VieraIP = tvIP;
 		console.log ( '\r\nVieraRemote => VIErA IP = ' + VieraIP + ' (Auto détection)\r\n');
-=======
-=======
->>>>>>> origin/master
-	findViera( 'Panasonic VIErA', 'DTV', function ( tvIP ) {
-		if ( !tvIP ) { return console.log ( '\r\nVieraRemote => T V VIErA non trouvée (Auto Détection)\r\n' ) }
-		VieraIP = tvIP;
-		console.log ( '\r\nVieraRemote => VIErA IP = ' + VieraIP + ' (Auto Détection)\r\n');
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
 	});
 }
 
@@ -46,14 +25,7 @@ exports.action = function ( data , callback , config , SARAH ) {
 
 	if ( !VieraIP ) { return callback ({ 'tts' : 'T V Viera non trouvée' }) }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	var keyArray = data.key.split ( ',' );
-=======
-=======
->>>>>>> origin/master
-	var keyArray = data.key.split( ',' );
->>>>>>> origin/master
 	
 	sendViera ( keyArray );
 
@@ -64,7 +36,7 @@ exports.action = function ( data , callback , config , SARAH ) {
 		switch ( cmdViera.substr(0,3) ) {
 			case "NRC" :
 				var TvCode		= '<X_KeyEvent>' + cmdViera + '</X_KeyEvent>';
-				var TvAction 	= 'X_SendKey';
+				var TvAction	= 'X_SendKey';
 				var TvUrl		= '/nrc/control_0';
 				var TvUrn		= 'panasonic-com:service:p00NetworkControl:1#';
 				break;
@@ -76,7 +48,7 @@ exports.action = function ( data , callback , config , SARAH ) {
 				break;
 			case "Get" :
 				var TvCode		= '<InstanceID>0</InstanceID><Channel>Master</Channel>';
-				var TvAction 	= cmdViera;
+				var TvAction	= cmdViera;
 				var	TvUrl		= '/dmr/control_0';
 				var TvUrn		= 'schemas-upnp-org:service:RenderingControl:1#';
 				break;
@@ -97,7 +69,6 @@ exports.action = function ( data , callback , config , SARAH ) {
 
 		// Sending SOAP request
 		var request = require ('request' );
-<<<<<<< HEAD
 
 		request ({	uri	    : 	'http://' + VieraIP + ':55000' + TvUrl,
 					method  : 	'POST',
@@ -108,23 +79,6 @@ exports.action = function ( data , callback , config , SARAH ) {
 
 		}, function ( error , response , body ) {
 
-=======
-		request ({
-			uri	    : 'http://' + VieraIP + ':55000' + TvUrl,
-			method  : 'POST',
-			headers :
-			{
-				'Content-length' :   body.length,
-				'Content-type'	 :   'text/xml; charset="utf-8"',
-				'SOAPACTION'	 :   '"urn:' + TvUrn + TvAction +'"'
-			},
-			body	: body 
-		}, function ( error , response , body ) {
-
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
 				if ( !error && response.statusCode == 200 ) {
     				if ( data.key != undefined ) {
     					var regex = /<CurrentVolume>(\d*)<\/CurrentVolume>/gm;
