@@ -46,13 +46,14 @@ exports.init = function ( SARAH ) {
 
 exports.action = function ( data , callback , config , SARAH ) {
 
-	var 	myReg = /\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b/;
+	var	myReg = /\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b/,
+		keyArray = data.key.split ( ',' );
 	
-	if ( ! myReg.test( VieraIP ) && ! myReg.test( config.modules.vieraremote.Viera_IP )) { 
+	if ( ! myReg.test( SARAH.context.vieraremote.ip ) && ! myReg.test( config.modules.vieraremote.Viera_IP )) { 
 		return callback ({ 'tts' : 'T V Viera, non trouvée' }) }
 
-	var keyArray = data.key.split ( ',' );
-	
+	VieraIP = SARAH.context.vieraremote.ip;
+
 	sendViera ( keyArray );
 
 	function sendViera ( TvCmd ) {
