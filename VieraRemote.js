@@ -9,7 +9,7 @@
 */
 
 exports.init = function ( SARAH ) {
-	var config = SARAH.ConfigManager.getConfig()
+	var config = SARAH.ConfigManager.getConfig();
 
 	if ( /^autodetect$/i.test( config.modules.vieraremote.Viera_IP ) == false ) return console.log('VieraRemote => Autodetect [OFF]');
 
