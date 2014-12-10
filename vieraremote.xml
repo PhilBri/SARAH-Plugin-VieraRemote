@@ -5,7 +5,6 @@
   <item>Sarah</item>
     
     <one-of>
-
       <!-- Orders => Keys -->
       <item>Allume la télé
             <tag>out.action.key="NRC_POWER-ONOFF"    ;out.action.ttsAction="la télé est allumée";</tag>
