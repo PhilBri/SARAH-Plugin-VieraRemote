@@ -1,5 +1,5 @@
 /*__________________________________________________
-|              PanaBDRemote v2.1                    |
+|                VieraRemote v2.2                   |
 |                                                   |
 | Author : Phil Bri (12/2014)                       |
 |    (See http://encausse.wordpress.com/s-a-r-a-h/) |
@@ -8,24 +8,21 @@
 |___________________________________________________|
 */
 
-var VieraIP;
-
 exports.init = function ( SARAH ) {
-	var config = SARAH.ConfigManager.getConfig();
+	var config = SARAH.ConfigManager.getConfig()
 
-	if ( /^autodetect$/i.test( config.modules.vieraremote.Viera_IP ) == false ) {
-		return VieraIP = config.modules.vieraremote.Viera_IP;
-	}
+	if ( /^autodetect$/i.test( config.modules.vieraremote.Viera_IP ) == false ) return console.log('VieraRemote => Autodetect [OFF]');
 
 	// Configure ip autodetection : (Auto Detect Plugin)
 	if ( ! SARAH.context.vieraremote ) {
 		fsearch();
+
 		SARAH.listen ( 'autodetect', function ( data ) {
-			if ( data.from != 'VieraRemote' ) {
-				fsearch();
-			} else {
-				if ( VieraIP ) console.log ( '\r\nVieraRemote => TV VIErA : ip = ' + VieraIP + ' (Auto Detect Plugin)');
-				else console.log ( '\r\nVieraRemote => TV VIErA : Non trouvée (Auto Detect Plugin)' );
+			if ( data.from != 'VieraRemote' ) fsearch();
+			else {
+
+				if ( SARAH.context.vieraremote.ip ) console.log ( '\r\nVieraRemote => Autodetect [ON] : ip = ' + SARAH.context.vieraremote.ip);
+				else console.log ( '\r\nVieraRemote => Autodetect [ON] : ip non trouvée !' );
 				SARAH.context.flag = false;
 			}
 		});
@@ -37,7 +34,6 @@ exports.init = function ( SARAH ) {
 
 			findViera = require ( './lib/findviera' ) ( 'Panasonic', 'DTV', function ( RetIP ) {
 				SARAH.context.vieraremote = { 'ip' : RetIP };
-				VieraIP = SARAH.context.vieraremote.ip;
 				SARAH.trigger ( 'autodetect', { 'from' : 'VieraRemote' });
 			});
 		}
@@ -47,12 +43,12 @@ exports.init = function ( SARAH ) {
 exports.action = function ( data , callback , config , SARAH ) {
 
 	var	myReg = /\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b/,
-		keyArray = data.key.split ( ',' );
+		keyArray = data.key.split ( ',' ),
+		VieraIP;
 	
-	if ( ! myReg.test( SARAH.context.vieraremote.ip ) && ! myReg.test( config.modules.vieraremote.Viera_IP )) { 
-		return callback ({ 'tts' : 'T V Viera, non trouvée' }) }
-
-	VieraIP = SARAH.context.vieraremote.ip;
+    if ( typeof(SARAH.context.vieraremote) != 'undefined' ) VieraIP = SARAH.context.vieraremote.ip
+    else if ( myReg.test( config.modules.vieraremote.Viera_IP ) == true ) VieraIP = config.modules.vieraremote.Viera_IP
+    else return callback ({ 'tts' : 'T V Viera non trouvée' })
 
 	sendViera ( keyArray );
 
@@ -103,27 +99,24 @@ exports.action = function ( data , callback , config , SARAH ) {
 					body	: 	body 
 
 		}, function ( error , response , body ) {
-
-				if ( !error && response.statusCode == 200 ) {
-    				if ( data.key != undefined ) {
+				if ( ! error && response.statusCode == 200 ) {
+	   				if ( data.key != undefined ) {
     					var regex = /<CurrentVolume>(\d*)<\/CurrentVolume>/gm;
 						var match = regex.exec ( body );
+						
 						if (  match ) {
 							var volume = match[1].toString();
-							console.log ( "\r\nVieraRemote => Volume TV = " + volume + ' %\r\n' );
+							console.log ( "\r\nVieraRemote => Volume actuel = " + volume + ' %\r\n' );
 							callback ({ 'tts': 'Le volume actuel est de' + volume + ' %' });
-						} else {
-							callback ({ 'tts': data.ttsAction });
-						}
+						} else callback ({ 'tts': data.ttsAction });
+						
 						if ( keyArray.length ) {
 							sendViera ( keyArray );
 						}
     				}
    					console.log ( '\r\nVieraRemote => Commande : "' + cmdViera + '" = OK \r\n' );
 
-   				} else {
-     				callback ({ 'tts': "L'action a échouée" });
-				}
+   				} else callback ({ 'tts': "L'action a échouée" });
 			}
 		);
 	}
